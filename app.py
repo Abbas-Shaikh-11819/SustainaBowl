@@ -116,6 +116,14 @@ class EcoEatsRecommender:
 # global
 recommender = None
 
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "healthy", "message": "EcoEats ML API is running"})
