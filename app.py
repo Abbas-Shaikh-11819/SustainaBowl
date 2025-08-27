@@ -193,6 +193,7 @@ def initialize_recommender():
     recommender = EcoEatsRecommender(df)
     print("✅ EcoEats Recommender initialized successfully!")
 
+initialize_recommender()
+
 if __name__ == '__main__':
-    initialize_recommender()
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)
