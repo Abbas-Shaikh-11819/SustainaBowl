@@ -2,7 +2,10 @@
 
 class EcoEatsApp {
     constructor() {
-        this.apiUrl = 'http://localhost:5000'; // Update with your API URL
+        this.apiUrl = window.location.hostname === "localhost"
+  ? "http://localhost:5000"
+  : "https://sustainabowl.onrender.com/";
+
         this.currentSlide = 0;
         this.slides = document.querySelectorAll('.carousel-slide');
         this.indicators = document.querySelectorAll('.indicator');
