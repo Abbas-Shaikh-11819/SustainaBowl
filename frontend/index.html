@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SustainaBowl - Smart Food Recommendations for a Sustainable Future</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-leaf"></i>
+                <span>SustainaBowl</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#discover" class="nav-link">Discover</a>
+                <a href="#impact" class="nav-link">Impact</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+            <!-- <div class="nav-actions">
+                <button class="btn-secondary">
+                    <i class="fas fa-chart-line"></i>
+                    My Impact
+                </button>
+            </div> -->
+        </div>
+    </nav>
+
+    <!-- Hero Carousel Section -->
+    <section class="hero-carousel" id="home">
+        <div class="carousel-container">
+            <div class="carousel-slide active" data-slide="0">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1>Every Meal Matters</h1>
+                        <p>Your food choices create ripples across the planet. A single meal can save up to 2.5kg of CO₂
+                            emissions.</p>
+                        <div class="impact-stat">
+                            <i class="fas fa-globe-americas"></i>
+                            <span>Food production accounts for 26% of global greenhouse gas emissions</span>
+                        </div>
+                    </div>
+                    <div class="slide-visual">
+                        <div class="floating-icon">🌍</div>
+                        <div class="floating-icon delay-1">🍽️</div>
+                        <div class="floating-icon delay-2">🌱</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slide" data-slide="1">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1>Small Changes, Big Impact</h1>
+                        <p>Choosing eco-friendly alternatives is like planting 5 trees every week. Your kitchen becomes
+                            a forest of change.</p>
+                        <div class="impact-stat">
+                            <i class="fas fa-tree"></i>
+                            <span>1 sustainable meal = 0.5 trees planted in carbon offset</span>
+                        </div>
+                    </div>
+                    <div class="slide-visual">
+                        <div class="floating-icon">🌳</div>
+                        <div class="floating-icon delay-1">🥗</div>
+                        <div class="floating-icon delay-2">💚</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slide" data-slide="2">
+                <div class="slide-content">
+                    <div class="slide-text">
+                        <h1>Nutrition Meets Sustainability</h1>
+                        <p>Don't compromise on health for the planet. Our AI finds dishes that are both nutritious and
+                            eco-friendly.</p>
+                        <div class="impact-stat">
+                            <i class="fas fa-heart"></i>
+                            <span>95% nutritional similarity with 60% less carbon footprint</span>
+                        </div>
+                    </div>
+                    <div class="slide-visual">
+                        <div class="floating-icon">💪</div>
+                        <div class="floating-icon delay-1">🧠</div>
+                        <div class="floating-icon delay-2">🌿</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-indicators">
+            <button class="indicator active" data-slide="0"></button>
+            <button class="indicator" data-slide="1"></button>
+            <button class="indicator" data-slide="2"></button>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-arrow">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <span>Discover Your Impact</span>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content" id="discover">
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="container">
+                <div class="search-header">
+                    <h2>Discover Your Food's Environmental Impact</h2>
+                    <p>Enter any dish and see how you can make it more sustainable while keeping it delicious</p>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-box">
+                        <div class="search-input-wrapper">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="dishInput" placeholder="Try 'Chicken Curry', 'Pasta', 'Biryani'..."
+                                autocomplete="off">
+                            <button type="button" id="searchBtn" class="search-btn">
+                                <span>Analyze</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        <div class="search-suggestions" id="searchSuggestions"></div>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState" style="display: none;">
+                    <div class="loader">
+                        <div class="leaf-loader">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                    </div>
+                    <p>Analyzing your dish and finding eco-friendly alternatives...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="container">
+                <!-- Target Dish Analysis -->
+                <div class="dish-analysis">
+                    <div class="analysis-header">
+                        <h3 id="targetDishName">Your Dish Analysis</h3>
+                        <div class="carbon-badge" id="targetCarbonBadge">
+                            <i class="fas fa-smog"></i>
+                            <span id="targetCarbon">0.0 kg CO₂</span>
+                        </div>
+                    </div>
+
+                    <div class="analysis-grid row g-4">
+                        <!-- Nutritional Chart -->
+                        <div class="chart-card col-12 col-lg-6">
+                            <h4>Nutritional Breakdown</h4>
+                            <div class="chart-container">
+                                <canvas id="nutritionChart"></canvas>
+                            </div>
+                            <div class="nutrition-details" id="nutritionDetails">
+                                <!-- Nutrition values will be populated here -->
+                            </div>
+                        </div>
+
+                        <!-- Carbon Impact -->
+                        <div class="impact-card col-12 col-lg-6">
+                            <h4>Environmental Impact</h4>
+                            <div class="impact-visualizations" id="impactVisualizations">
+                                <!-- Impact comparisons will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Recommendations -->
+                <div class="recommendations">
+                    <div class="recommendations-header">
+                        <h3>🌱 Eco-Friendly Alternatives</h3>
+                        <p>Similar nutrition, lower carbon footprint</p>
+                    </div>
+
+                    <div class="recommendations-grid" id="recommendationsGrid">
+                        <!-- Recommendation cards will be populated here -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Facts Section -->
+        <section class="facts-section" id="impact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>The Hidden Impact of Food</h2>
+                    <p>Understanding how our food choices shape the planet</p>
+                </div>
+
+                <div class="facts-grid">
+                    <div class="fact-card">
+                        <div class="fact-icon">🚗</div>
+                        <h4>Transportation Equivalent</h4>
+                        <p>Eating 1kg of beef creates the same emissions as driving 63km in a car</p>
+                        <div class="fact-detail">
+                            <i class="fas fa-car"></i>
+                            <span>~27kg CO₂ per kg beef</span>
+                        </div>
+                    </div>
+
+                    <div class="fact-card">
+                        <div class="fact-icon">🏭</div>
+                        <h4>Coal Burning</h4>
+                        <p>A meat-heavy meal equals burning 2.5kg of coal for electricity</p>
+                        <div class="fact-detail">
+                            <i class="fas fa-fire"></i>
+                            <span>~5kg CO₂ per meal</span>
+                        </div>
+                    </div>
+
+                    <div class="fact-card">
+                        <div class="fact-icon">🏍️</div>
+                        <h4>Motorbike Ride</h4>
+                        <p>One high-carbon meal = 25km ride on Honda Activa 5G</p>
+                        <div class="fact-detail">
+                            <i class="fas fa-motorcycle"></i>
+                            <span>~60g CO₂ per km</span>
+                        </div>
+                    </div>
+
+                    <div class="fact-card">
+                        <div class="fact-icon">💡</div>
+                        <h4>Home Energy</h4>
+                        <p>Daily sustainable eating saves enough energy to power your home for 3 hours</p>
+                        <div class="fact-detail">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>~1.5kWh saved</span>
+                        </div>
+                    </div>
+
+                    <div class="fact-card">
+                        <div class="fact-icon">🌳</div>
+                        <h4>Tree Planting</h4>
+                        <p>Choosing plant-based once a week = planting 156 trees annually</p>
+                        <div class="fact-detail">
+                            <i class="fas fa-seedling"></i>
+                            <span>~3kg CO₂ saved per week</span>
+                        </div>
+                    </div>
+
+                    <div class="fact-card">
+                        <div class="fact-icon">🌊</div>
+                        <h4>Water Footprint</h4>
+                        <p>Sustainable food choices save 50 bathtubs of water monthly</p>
+                        <div class="fact-detail">
+                            <i class="fas fa-tint"></i>
+                            <span>~15,000L water saved</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-brand">
+                        <i class="fas fa-leaf"></i>
+                        <span>SustainaBowl</span>
+                    </div>
+                    <p>Making sustainable eating accessible, one dish at a time.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Platform</h4>
+                        <a href="index.html">Home</a>
+                        <a href="#discover">Dish Analysis</a>
+                        <a href="#" id="ingredientDbLink">Ingredient Database</a>
+                        <a href="about.html">About Us</a>
+                    </div>
+
+                    <div class="link-group">
+  <h4>Resources</h4>
+  <a href="https://www.un.org/sustainabledevelopment/" target="_blank">UN SDGs</a>
+  <a href="https://www.ipcc.ch/" target="_blank">IPCC Reports</a>
+  <a href="https://ourworldindata.org/environment" target="_blank">Our World in Data</a>
+  <a href="https://www.epa.gov/ghgemissions" target="_blank">EPA Carbon Data</a>
+</div>
+
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SustainaBowl. Nourishing people, nurturing planet.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
