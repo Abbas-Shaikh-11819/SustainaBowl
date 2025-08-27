@@ -173,6 +173,14 @@ def get_stats():
         "allergens": df['Allergy'].unique().tolist()[:10]
     })
 
+@app.errorhandler(500)
+def internal_error(e):
+    return jsonify(error="Internal Server Error", details=str(e)), 500
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify(error="Not Found"), 404
+
 def initialize_recommender():
     global recommender
     base = os.path.dirname(os.path.abspath(__file__))
