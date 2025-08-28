@@ -1822,6 +1822,15 @@ body {
   }
 }
 
+@media (max-width: 432px) {
+  .nav-links{
+    gap: var(--space-12);
+  }
+
+  .nav-link{
+    font-size: 12px;
+  }
+}
 
 
 
